@@ -1,0 +1,13 @@
+<?php
+
+require_once("./Warm-Blooded.php");
+class Bird extends WarmBlooded{
+    public function __construct(){
+        parent::__construct();
+    }
+
+    protected function stampSpec(){
+        echo parent::stampSpec() . "Sono un UCCELLO\n\n";
+
+    }
+}
