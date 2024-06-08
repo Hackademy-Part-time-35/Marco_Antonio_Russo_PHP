@@ -137,17 +137,87 @@ function countString($str){
 }
 
 echo "10) " . countString("Questa è 1 stringa da 7 caratteri") . "\n";
+
 // 11. scrivere una funzione che accetta come parametri un array di numeri ed un numero di soglia, e restituisca un array formato dai numeri maggiori della soglia fornita. Ad esempio ([1,2,3,4], 3) => [4]
+function greatherThan(array $array, int $limit){
+    
+    return array_filter($array, function($el) use ($limit){
+        return $el > $limit;
+    });
+}
+
+echo "11) ";
+print_r(greatherThan([1,2,3,4],3));
+echo "\n";
 
 // 12. scrivere una funzione che trasformi un numero in ore e minuti: ad esempio 3014 => 50:14, devono essere sempre presenti 2 cifre, sia per le ore che per i minuti (non devo leggere, ad esempio 1:9 ma 01:09)
+function toHours($num){
+    $hours = round($num /60);
+    $min = $num % 60;
+
+    if($hours < 10){
+        $hours = "0" . $hours;
+    }
+    if($min < 10){
+        $min = "0" . $min;
+    }
+
+    return $hours . ":" . $min;
+}   
+
+echo "12) " . toHours(3014) . "\n";
 
 // 13. scrivre una funzione che generi un array formato da N numeri random interi, fra un minimo e un massimo assegnati 
+function arrayOfRandoms($min, $max, $n){
+    $array = [];
+    for($i = 0; $i < $n; $i++){
+        $array[] = rand($min,$max);
+    }
+    return $array;
+}
+echo "13) ";
+print_r(arrayOfRandoms(1,10,6));
+echo "\n";
 
 // 14. Scrivere una funzione che trasforma un array di array in un oggetto (ogni elemento è una coppia ad esempio [["nome", "Marco"], ["cognome", "russo"]])
 
+function arrayToObj(array $array){
+    $object = new stdClass();
+    foreach($array as $value){
+        $object->{$value[0]} = $value[1];
+    }
+    return $object;
+}
+
+echo "14) ";
+print_r(arrayToObj([["nome", "Marco"], ["cognome", "russo"]]));
+echo "\n";
+
 // 15. scrivere una funzione che, assegnata una stringa, ritorni un oggetto con chiavi le parole (distinte) e valori la loro frequenza. Ad esempio "Quella cosa affianco alla cosa sulla cosa" => {Quella: 1, cosa: 3, affianco: 1, alla: 1, sulla: 1}
 
-// 16. scrivere una funzione che, data una stringa, trasformi la prima lettera di ogni marola in maiuscolo
+function stringToObject($string){
+    $array = explode(" ", $string);
+    $obj = new stdClass();
+    foreach($array as $value){
+        $obj->{$value} = substr_count($string, $value);
+    }
+    return $obj;
+}
+echo "15) ";
+print_r(stringToObject("Quella cosa affianco alla cosa sulla cosa"));
+echo "\n";
+
+// 16. scrivere una funzione che, data una stringa, trasformi la prima lettera di ogni parola in maiuscolo
+function capitalize($string){
+    $array = explode(" ", $string);
+    $array = array_map(function($elem){
+        $elem = ucfirst($elem);
+        return $elem;
+    }, $array);
+    return implode(" ", $array);
+}
+
+echo "16) " . capitalize("Quella cosa affianco alla cosa sulla cosa") . "\n";
 
 // 17. scrivere una funzione che, assegnata una stringa, ritorni il numero di vocali presenti (gestire le maiuscole)
 
