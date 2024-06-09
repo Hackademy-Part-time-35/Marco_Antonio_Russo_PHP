@@ -43,3 +43,4 @@ $ironman2->attack($dummy); //attacco dopo powerUp
 
 
 print_r($ironman2->componentStats);
+
